@@ -24,7 +24,7 @@ xx352@nyu.edu
 
 funExample::"example function, Input[p1,p2,p3], Outputp[p1+p2+p3]"
 
-funSplitParameterSpace::usage="based on ParameterListFile.mx, split it into any number of runs of your choice,
+funSplitParameterSpace::usage="based on parameters.mx, split it into any number of runs of your choice,
 Input[ParameterListFile.mx file name, number of runs want to split to, (optional)additional files needed in the directory for each run],
 Output[generate directory /run1 to /runX, with run.m, rerun.m, parameters.mx for each run]";
 
