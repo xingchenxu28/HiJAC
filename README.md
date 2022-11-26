@@ -10,7 +10,7 @@ Notice: The function f() and its dependent can be written in Mathematica or pyth
 
 ### HiJAC has the following advnaced features
 
-(1) $\bf{Monitor the progress in real time}$: HiJAC allows you to see how many parameters that has been completed.
+(1) $\textbf{Monitor the progress in real time}$: HiJAC allows you to see how many parameters that has been completed.
 
 (2) Resume from a breakpoint: HiJACK will save the progress and pick up the jobs from the breakpoint. Useful when your jobs cannot be completed all at once.
 
