@@ -3,7 +3,7 @@ HIgh performence computing Job Array Creator (HiJAC) is a Mathematica utility pa
 
 What is it for: 
 
-You have a function f(p1,p2,..pn) that you want to evaluate. The input parameters $(p1,p2,..p_n)$ form a matrix of dimension (m1,m2,..mn) and the output is a number or string or a list of numbers or strings. You want to scan the parameter space faster by runnning multiple jobs at the same time on a HPC cluster rather than do it one by one. Notice: The function f() and its dependent can be written in Mathematica or python (can be easily generalized to other forms as long as Mathematica can excute it). The paramater space cannot be a irregular matrix (i.e. three items in the first row and one items in the second row). I recommend convert a irregular matrix to a 1
+You have a function f(p1,p2,..pn) that you want to evaluate. The input parameters $(p_1,p_2,..p_n)$ form a matrix of dimension (m_1,m_2,..m_n) and the output is a number or string or a list of numbers or strings. You want to scan the parameter space faster by runnning multiple jobs at the same time on a HPC cluster rather than do it one by one. Notice: The function f() and its dependent can be written in Mathematica or python (can be easily generalized to other forms as long as Mathematica can excute it). The paramater space cannot be a irregular matrix (i.e. three items in the first row and one items in the second row). I recommend convert a irregular matrix to a $1\times n$
 
 
 HiJAC has the following advnaced features:
