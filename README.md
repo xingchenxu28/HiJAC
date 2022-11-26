@@ -19,3 +19,11 @@ Notice: The function $f()$ and its dependent can be written in Mathematica or py
 ## (1) Explaination of the files
 
 $\textbf{HiJAC.m}$: The main HiJAC package file. It contains the function $funSplitParameterSpace[k]$ that split the parameter space into $k$ one-dimensional lists and creat the job array for each small list. $k$ can be anything and does not have to be a factor of the total number of parameters $m_1 \times m_2 \times .. \times m_n$. You can put your function $f(p_1,p_2,..p_n)$ and all its dependent here.
+
+$\textbf{initial.m}$: Initialize the job array. It creats "/parameters.mx" that contains the whole parameter space, and calls $funSplitParameterSpace[k]$ to creat the sub-directories /run1 /run2 .. /runk. Each /runX is a sub-job that calculate part of the parameter space. You need to define your parameter space $(p_1,p_2,..p_n)$ here. Every /runX includes three files: "parameters.mx" is the smaller parameter list for each sub-job, "run.m" and "rerun.m" are described below.
+
+$\textbf{run.m}$: This will be copyied to each sub-directoriy /runX. It reads the parameters in "/runX/parameters.mx", calculate the results $f(p_1,p_2,..p_n)$, and export each result into a log file "/runX/output.dat" as seperate lines in real time. If all parameters have been covered, it export all results into "/runX/output.mx". You need to call your function $f(p_1,p_2,..p_n)$ here.
+
+$\textbf{rerun.m}$: This will be copyied to each sub-directoriy /runX. Similar to $\textbf{run.m}$. It is used to resume the job from from where it was left. It reads the unfinished "/runX/output.dat" and continue the calculation until all parameters have been covered, then export the results into "/runX/output.mx".
+
+$\textbf{final.m}$: When all jobs are completed, that is when there exists the .mx file "/runX/output.mx" for each /runX
