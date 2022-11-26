@@ -24,6 +24,10 @@ $\textbf{initial.m}$: Initialize the job array. It creats "/parameters.mx" that 
 
 $\textbf{run.m}$: This will be copyied to each sub-directoriy /runX. It reads the parameters in "/runX/parameters.mx", calculate the results $f(p_1,p_2,..p_n)$, and export each result into a log file "/runX/output.dat" as seperate lines in real time. If all parameters have been covered, it export all results into "/runX/output.mx". You need to call your function $f(p_1,p_2,..p_n)$ here.
 
-$\textbf{rerun.m}$: This will be copyied to each sub-directoriy /runX. Similar to $\textbf{run.m}$. It is used to resume the job from from where it was left. It reads the unfinished "/runX/output.dat" and continue the calculation until all parameters have been covered, then export the results into "/runX/output.mx".
+$\textbf{rerun.m}$: Resume from a breakpoint. This will be copyied to each sub-directoriy /runX. Similar to $\textbf{run.m}$. It is used to resume the job from from where it was left. It reads the unfinished "/runX/output.dat" and continue the calculation until all parameters have been covered, then export the results into "/runX/output.mx".
+
+$\textbf{arraycheck.m}$: Resume from a breakpoint. This will check which /runX has not been finished and generate a bash file "/rerunarray.bash" which will submit jobs that excute $\textbf{rerun.m}$ for all unfinished /runX.
 
 $\textbf{final.m}$: When all jobs are completed, that is when there exists "/runX/output.mx" for each /runX, it will import all output and recombine them into a single matrix of dimension $m_1 \times m_2 \times .. \times m_n$ that has exactly the same structure as the parameter space defined in $\textbf{initial.m}$. The parameters $(p_1,p_2,..p_n)$ and the results $f(p_1,p_2,..p_n)$ are in one-to-one correspondence. Result will be export to "/result.mx"
+
+
