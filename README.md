@@ -3,6 +3,5 @@ HIgh performence computing Job Array Creator (HiJAC) is a Mathematica utility pa
 
 HiJAC also has the following advnaced features:
 
-(1) Monitor the progress in real time: HiJAC allows you to see how many parameters has been completed.
-
+(1) Monitor the progress in real time: HiJAC allows you to see how many parameters has been completed.\n
 (2)
