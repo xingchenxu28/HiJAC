@@ -16,6 +16,6 @@ Notice: The function f() and its dependent can be written in Mathematica or pyth
 
 (3) Hierarchical calculation: Instead of resuming all unfinished jobs from the breakpoint, you can also chooese to treat all remaining parameters as a new sub-parameter space and use HiJAC to divide it into any number of job arrays. This can be done iteratively so that your parameter space is converted into many levels. When the lowest level has finished, HiJAC will recombine all the results up to the top level. This is a time saver in certain circumstance.
 
-# 1. Explaination of the files
+# (1) Explaination of the files
 
 1
