@@ -18,4 +18,4 @@ Notice: The function f() and its dependent can be written in Mathematica or pyth
 
 ## (1) Explaination of the files
 
-$\textbf{HiJAC.m}$: The main HiJAC package code. It contains the function $funSplitParameterSpace[]$
+$\textbf{HiJAC.m}$: The main HiJAC package file. It contains the function $funSplitParameterSpace[ ]$
