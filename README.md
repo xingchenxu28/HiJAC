@@ -8,7 +8,7 @@ You have a function f(p1,p2,..pn) that you want to evaluate. The input parameter
 Notice: The function f() and its dependent can be written in Mathematica or python (can be easily generalized to other forms as long as Mathematica can excute it). The paramater space cannot be a irregular matrix (i.e. three items in the first row and one items in the second row). I recommend convert a irregular matrix to a $1\times n$ list, use HiJAC, and convert the results back manually.
 
 
-HiJAC has the following advnaced features:
+$\textbf{HiJAC has the following advnaced features:}
 
 (1) Monitor the progress in real time: HiJAC allows you to see how many parameters that has been completed.
 
