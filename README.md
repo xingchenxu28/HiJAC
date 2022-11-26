@@ -16,6 +16,11 @@ Notice: The function $f()$ and its dependent can be written in Mathematica or py
 
 (3) Hierarchical calculation: Instead of resuming all unfinished jobs from the breakpoint, you can also chooese to treat all remaining parameters as a new sub-parameter space and use HiJAC to divide it into any number of job arrays. This can be done iteratively so that your parameter space is converted into many levels. When the lowest level has finished, HiJAC will recombine all the results up to the top level. This is a time saver in certain circumstance.
 
+### Words from the author
+
+
+
+
 ## (1) Explaination of the files
 
 $\textbf{HiJAC.m}$: The main HiJAC package file. It contains the function $funSplitParameterSpace[k]$ that split the parameter space into $k$ one-dimensional lists and creat the job array for each small list. $k$ can be anything and does not have to be a factor of the total number of parameters $m_1 \times m_2 \times .. \times m_n$. You can put your function $f(p_1,p_2,..p_n)$ and all its dependent here.
@@ -33,3 +38,11 @@ $\textbf{final.m}$: Finalize the task. When all jobs are completed, that is when
 $\textbf{nextlevel.m}$: Hierarchical calculation. This will check each /HiJAC/runX and summerize all unfinished parameters. Then it use the unfinished parameters to creat a second level job in directory /HiJACsub that is basically the same as /HiJAC except "/HiJACsub/parameters.mx" is now all the unfinished parameters. /HiJACsub can now be treated as a new job just like /HiJAC but with a smallmer parameter space. This can be done iteratively, creating /HiJACsub, /HiJACsubsub, ... until the parameter space is small enough to be scaned at one shot.
 
 $\textbf{previouslevel.m}$: Feedback
+
+
+## (2) How to use HiJAC
+
+
+
+
+
