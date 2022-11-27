@@ -18,6 +18,7 @@ Notice: The function $f()$ and its dependent can be written in Mathematica or py
 
 ### Words from the author
 
+HEP,HET
 
 
 
@@ -35,10 +36,9 @@ $\textbf{arraycheck.m}$: Resume from a breakpoint. This will check which /HiJAC/
 
 $\textbf{final.m}$: Finalize the task. When all jobs are completed, that is when there exists "/HiJAC/runX/output.mx" for each /HiJAC/runX, it will import all output and recombine them into a single matrix of dimension $m_1 \times m_2 \times .. \times m_n$ that has exactly the same structure as the parameter space defined in $\textbf{initial.m}$. The parameters $(p_1,p_2,..p_n)$ and the results $f(p_1,p_2,..p_n)$ are in one-to-one correspondence. Result will be export to "/HiJAC/result.mx"
 
-$\textbf{nextlevel.m}$: Hierarchical calculation. This will check each /HiJAC/runX and summerize all unfinished parameters. Then it use the unfinished parameters to creat a second level job in directory /HiJACsub that is basically the same as /HiJAC except "/HiJACsub/parameters.mx" is now all the unfinished parameters. /HiJACsub can now be treated as a new job just like /HiJAC but with a smallmer parameter space. This can be done iteratively, creating /HiJACsub, /HiJACsubsub, ... until the parameter space is small enough to be scaned at one shot.
+$\textbf{nextlevel.m}$: Hierarchical calculation. This will check each /HiJAC/runX and summerize all unfinished parameters. Then it use the unfinished parameters to creat a second level job in directory /HiJACsub that is basically the same as /HiJAC except that "/HiJACsub/parameters.mx" only contains the unfinished parameters. /HiJACsub can now be treated as a new job just like /HiJAC but with a smallmer parameter space. The information of the parameter space structure is stored in "/HiJACsub/record.mx". This can be done iteratively, creating /HiJACsub, /HiJACsubsub, ... until the parameter space is small enough to be scaned all at once. 
 
-$\textbf{previouslevel.m}$: Feedback
-
+$\textbf{previouslevel.m}$: Hierarchical calculation. This will summerize the finished results from a lower level e.g /HiJACsub and put them back into the corresponding log file "/HiJAC/runX/output.dat" of the upper level.
 
 ## (2) How to use HiJAC
 
