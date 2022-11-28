@@ -23,9 +23,9 @@ There is a saying in Chinese: "工欲善其事，必先利其器", or "One must 
 
 The author hopes HiJAC can be helpful.
 
-## (1) Explaination of the files
+# (1) Explaination of the files
 
-#### HiJAC.m
+### HiJAC.m
 The main HiJAC package file. It contains the function $funSplitParameterSpace[k]$ that split the parameter space into $k$ one-dimensional lists and creat the job array for each small list. $k$ can be anything and does not have to be a factor of the total number of parameters $m_1 \times m_2 \times .. \times m_n$. You can put your function $f(p_1,p_2,..p_n)$ and all its dependent here.
 
 #### initial.m 
