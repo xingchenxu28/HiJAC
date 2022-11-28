@@ -28,35 +28,35 @@ The author hopes HiJAC can be helpful.
 ### HiJAC.m
 The main HiJAC package file. It contains the function $funSplitParameterSpace[k]$ that split the parameter space into $k$ one-dimensional lists and creat the job array for each small list. $k$ can be anything and does not have to be a factor of the total number of parameters $m_1 \times m_2 \times .. \times m_n$. You can put your function $f(p_1,p_2,..p_n)$ and all its dependent here.
 
-#### initial.m 
+### initial.m 
 Initialize the job array. It creats "/HiJAC/parameters.mx" that contains the whole parameter space, and calls $funSplitParameterSpace[k]$ to creat the sub-directories /HiJAC/run1, /HiJAC/run2, .. /HiJAC/runk. Every /HiJAC/runX is a sub-job that calculate part of the parameter space. You need to define your parameter space $(p_1,p_2,..p_n)$ here. Every /HiJAC/runX includes three files: "parameters.mx" is the smaller parameter list for each sub-job, "run.m" and "rerun.m" are described below.
 
-#### run.m
+### run.m
 This will be copyied to each sub-directoriy /HiJAC/runX. It reads the parameters in "/HiJAC/runX/parameters.mx", calculate the results $f(p_1,p_2,..p_n)$, and export each result into a log file "/HiJAC/runX/output.dat" as seperate lines in real time. If all parameters have been covered, it export all results into "/HiJAC/runX/output.mx". You need to call your function $f(p_1,p_2,..p_n)$ here.
 
-#### rerun.m
+### rerun.m
 Resume from a breakpoint. This will be copyied to each sub-directoriy /HiJAC/runX. Similar to $\textbf{run.m}$. It is used to resume the job from from where it was left. It reads the unfinished "/HiJAC/runX/output.dat" and continue the calculation until all parameters have been covered, then export the results into "/HiJAC/runX/output.mx".
 
-#### arraycheck.m
+### arraycheck.m
 Resume from a breakpoint. This will check which /HiJAC/runX has not been finished and generate a bash file "/HiJAC/rerunarray.bash" which will submit jobs that excute $\textbf{rerun.m}$ for all unfinished /HiJAC/runX.
 
-#### final.m
+### final.m
 Finalize the task. When all jobs are completed, that is when there exists "/HiJAC/runX/output.mx" for each /HiJAC/runX, it will import all output and recombine them into a single matrix of dimension $m_1 \times m_2 \times .. \times m_n$ that has exactly the same structure as the parameter space defined in $\textbf{initial.m}$. The parameters $(p_1,p_2,..p_n)$ and the results $f(p_1,p_2,..p_n)$ are in one-to-one correspondence. Result will be export to "/HiJAC/result.mx"
 
-#### nextlevel.m
+### nextlevel.m
 Hierarchical calculation. This will check each /HiJAC/runX and summerize all unfinished parameters. Then it use the unfinished parameters to creat a second level job in directory /HiJACsub that is basically the same as /HiJAC except that "/HiJACsub/parameters.mx" only contains the unfinished parameters. /HiJACsub can now be treated as a new job just like /HiJAC but with a smallmer parameter space. The information of the parameter space structure is stored in "/HiJACsub/record.mx". This can be done iteratively, creating /HiJACsub, /HiJACsubsub, ... until the parameter space is small enough to be scaned all at once. 
 
-#### previouslevel.m
+### previouslevel.m
 Hierarchical calculation. This will summerize the finished results from a lower level e.g /HiJACsub and put them back into the corresponding log file "/HiJAC/runX/output.dat" of the upper level.
 
-#### runarray.sbatch
+### runarray.sbatch
 Sbatch file for submitting new job arrays.
 
-#### rerunarray.sbatch
+### rerunarray.sbatch
 Sbatch file for resuming job arrays from breakpoints.
 
 
-## (2) How to use HiJAC
+# 3. How to use HiJAC
 
 #### 1 111
 
