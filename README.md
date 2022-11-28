@@ -68,7 +68,8 @@ Define your parameter space in $\textbf{HiJAC.m}$. It can be any dimension but m
 ### 3.3 Edit "/HiJAC/run.m" and "/HiJAC/rerun.m"
 Replace $funExample$ with the name of your own function to be evaluated. You can import whatever package you need for your function evaluation by addting Get\["../YourOwnPackage.m"] in the begining.
 
-
+### 3.4 Edit "/HiJAC/runarray.sbatch" and "/HiJAC/rerunarray.sbatch"
+Specify your job name, time needed, cpu/memory needed and other HPC parameters here. These are for a single job in the job array. Load the appropriate Mathematica version for your cluster by modifying "module load mathematica/12.1.1".
 
 
 
