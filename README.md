@@ -71,5 +71,6 @@ Replace $funExample$ with the name of your own function to be evaluated. You can
 ### 3.4 Edit "/HiJAC/runarray.sbatch" and "/HiJAC/rerunarray.sbatch"
 Specify your job name, time needed, cpu/memory needed and other HPC parameters here. These are for a single job in the job array. Load the appropriate Mathematica version for your HPC cluster by modifying "module load mathematica/12.1.1".
 
-
+### 3.5 Initialize the job array
+In the command 
 
