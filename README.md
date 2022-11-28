@@ -111,3 +111,7 @@ If all job arrays are finished and you checked by the "wd" command described in 
 math <final.m> final.out&
 ```
 
+This will creat the final result file "/HiJAC/result.mx", which should has the same dimension as the original parameter space "/HiJAC/parameters.mx". The results and the parameters are in one-to-one correspondence in these two files.
+
+
+
