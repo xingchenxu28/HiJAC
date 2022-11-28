@@ -12,6 +12,6 @@ module purge
 module load mathematica/12.1.1
 
 cd run${SLURM_ARRAY_TASK_ID}
-srun math < rerun.m > output.out
+srun math < rerun.m > rerun.out
 
 
