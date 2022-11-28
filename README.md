@@ -101,6 +101,8 @@ When the total number of lines you get from the above command equals to the tota
 Also you can check if your program is running properly by looking at these .dat files, e.g.
 
 ```sh
-wd -l run1/output.dat
+cat run1/output.dat
 ```
+
+### 3.8 Monitor the progress
 
