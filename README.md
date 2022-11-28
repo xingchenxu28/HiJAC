@@ -41,7 +41,14 @@ $\textbf{nextlevel.m}$: Hierarchical calculation. This will check each /HiJAC/ru
 
 $\textbf{previouslevel.m}$: Hierarchical calculation. This will summerize the finished results from a lower level e.g /HiJACsub and put them back into the corresponding log file "/HiJAC/runX/output.dat" of the upper level.
 
+$\textbf{runarray.sbatch}$: Sbatch file for submitting new job arrays.
+
+$\textbf{rerunarray.sbatch}$: Sbatch file for resuming job arrays from breakpoints.
+
+
 ## (2) How to use HiJAC
+
+
 
 
 
