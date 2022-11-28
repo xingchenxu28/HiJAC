@@ -60,7 +60,7 @@ Sbatch file for resuming job arrays from breakpoints.
 We will assume everything is put in the directory /HiJAC 
 
 ### 3.1 Edit "/HiJAC/HiJAC.m"
-Put all your functions and constants in $\textbf{HiJAC.m}$ so that they can be used by $\textbf{run.m}$ and $\textbf{rerun.m}$. Replace the example function $funExample(p1,p2,p3)$ 
+Put all your functions and constants in $\textbf{HiJAC.m}$ (remember to declear them properly in the begining "Preamble")so that they can be used by $\textbf{run.m}$ and $\textbf{rerun.m}$. Replace the example function $funExample(p1,p2,p3)$ with the function you want to evaluate with HiJAC. Alternatively, if all your things are included in a seperate package $\textbf{YourOwnPackage.m}$, you can choose to import it in $\textbf{run.m}$ and $\textbf{rerun.m}$ by adding $Get["../YourOwnPackage.m"]$
 
 
 
