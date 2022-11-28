@@ -104,5 +104,10 @@ Also you can check if your program is running properly by looking at these .dat 
 cat run1/output.dat
 ```
 
-### 3.8 Monitor the progress
+### 3.8 Recombine all results
+If all job arrays are finished and you checked by the "wd" command described in section 3.7, you can run $\textbf{final.m}$ to recombine all the results:
+
+```sh
+math <final.m> final.out&
+```
 
