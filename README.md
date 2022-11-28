@@ -113,5 +113,15 @@ math <final.m> final.out&
 
 This will creat the final result file "/HiJAC/result.mx", which should has the same dimension as the original parameter space "/HiJAC/parameters.mx". The results and the parameters are in one-to-one correspondence in these two files.
 
+If your jobs are terminated due to time limit and there are some parameters left, you can chooese between the following two methods: (1) Resume from breakpoints or (2) Hierarchical calculation. Which one is better depends on how many parameters are left, as described in section 4 and 5
+
+## 4. Resume from breakpoints
+
+
+
+
+
+
+
 
 
