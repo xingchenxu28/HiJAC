@@ -63,7 +63,7 @@ We will assume everything is put in the directory /HiJAC
 Put all your functions and constants in $\textbf{HiJAC.m}$ (remember to declear them properly in the begining "Preamble") so that they can be used by $\textbf{run.m}$ and $\textbf{rerun.m}$. Replace the example function $funExample(p1,p2,p3)$ with the function you want to evaluate. Alternatively, if a seperate package "/HiJAC/YourOwnPackage.m" has all your stuffs, you can choose to import it in $\textbf{run.m}$ and $\textbf{rerun.m}$ by adding the line Get\["../YourOwnPackage.m"] in both of them.
 
 ### 3.2 Edit "/HiJAC/initial.m"
-Define your parameter space in $\textbf{HiJAC.m}$. It can be any dimension but must be regular. Irregular matrix needs be converted to a $1\times N$ matrix first. Specify how many subspaces you want to split your parameter space into by changing the variable of $funSplitParameterSpace(k)$. The default is $k=100$.
+Define your parameter space in $\textbf{HiJAC.m}$. It can be any dimension but must be regular. Irregular matrix needs be converted to a $1\times N$ matrix first. Specify how many subspaces you want to split your parameter space into by changing the variable of $funSplitParameterSpace(k)$. The default is $k=100$. And $1 \leq k \leq \rm{ total number of parameters}.$ The maximum of $k$ depends on the HPC cluster you are using. 
 
 
 
