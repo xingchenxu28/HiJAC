@@ -80,3 +80,4 @@ module load mathematica/12.1.1
 math <initial.m> initial.out&
 ```
 
+This may take some time if your parameter space is very large. $\textbf{initial.m}$ will creat $/HiJAC/run1$ through $/HiJAC/runk$
