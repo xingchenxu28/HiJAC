@@ -59,8 +59,8 @@ Sbatch file for resuming job arrays from breakpoints.
 # 3. How to use HiJAC
 We will assume everything is put in the directory /HiJAC 
 
-### 3.1 Edit "/HiJAC/initial.m"
-Put all your functions and constants in $\textbf{initial.m}$
+### 3.1 Edit "/HiJAC/HiJAC.m"
+Put all your functions and constants in $\textbf{HiJAC.m}$ so that they can be used by $\textbf{run.m}$ and $\textbf{rerun.m}$ 
 
 
 
