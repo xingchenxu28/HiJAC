@@ -80,4 +80,4 @@ module load mathematica/12.1.1
 math <initial.m> initial.out&
 ```
 
-This may take some time if your parameter space is very large. $\textbf{initial.m}$ will creat $/HiJAC/run1$ through $/HiJAC/runk$
+This may take some time if your parameter space is very large. $\textbf{initial.m}$ will creat "/HiJAC/parameters.mx" as the overall parameter space, and creat directories /HiJAC/run1 through /HiJAC/runk with $\textbf{run.m}$, $\textbf{rerun.m}$, $\textbf{parameters.m}$ in each of them. The "/HiJAC/runX/parameters.mx" only contains parameters for that subspace. 
