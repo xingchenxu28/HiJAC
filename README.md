@@ -59,7 +59,7 @@ Sbatch file for resuming job arrays from breakpoints.
 # 3. How to use HiJAC
 We will assume everything is put in the directory /HiJAC 
 
-## Step-1: 
+### Step-1: 
 
 
 
