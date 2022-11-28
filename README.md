@@ -19,7 +19,7 @@ Notice: The function $f()$ and its dependent can be written in Mathematica or py
 ### Words from the author
 Mathematica has been widely used in the high energy physics community (especially for phenomenology) because of its strong symbolic calculation power. As theorestis or phenomenologists we often need to solve differential equations or evaluate numerical intergrations for a large parameter space. For example, predicting the number of events in a dark matter (DM) direct detection experiment based on some specific dark matter model with DM mass $m_\chi$ and effective coupling $\alpha$ usually requires a full scan of the 2-D $(m_\chi,\alpha)$ plane. The natural way to accelerate this process is to put the calculation in a HPC cluster and divide your parameter space into job arrays. This is highly non-trivial in Mathematica (maybe easier in python). HiJAC is born to solve this problem.
 
-There is a saying in Chinese: "工欲善其事，必先利其器", or "One must have good tools in order to do a good job". Learning to use HiJAC may take some time (mostly about one hour) and effort. However, once you mastered it, it will save you a lot of time especially when your parameter space is large. Of course, the user must have some knowledge of how to use HPC clusters and submit job arrays in slurm. 
+There is a saying in Chinese: "工欲善其事，必先利其器", or "One must have good tools in order to do a good job". Learning to use HiJAC may take some time (mostly about one hour). However, once you mastered it, it will save you a lot of time especially when your parameter space is large. Of course, the user must have some knowledge of how to use HPC clusters and submit job arrays in slurm. 
 
 The author hopes HiJAC can be helpful.
 
