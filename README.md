@@ -65,6 +65,9 @@ Put all your functions and constants in $\textbf{HiJAC.m}$ (remember to declear 
 ### 3.2 Edit "/HiJAC/initial.m"
 Define your parameter space in $\textbf{HiJAC.m}$. It can be any dimension but must be regular. Irregular matrix needs be converted to a $1\times N$ matrix first. Specify how many subspaces you want to split your parameter space into by changing the variable of $funSplitParameterSpace(k)$. The default is $k=100$. And theoretically $1\leq k \leq$ total number of parameters. However, the maximum of $k$ usually depends on how many job arrays you are allowed to queue in the HPC cluster you are using.
 
+### 3.3 Edit "/HiJAC/run.m" and "/HiJAC/rerun.m"
+Replace $funExample$ with the name of your own function to be evaluated. You can import whatever package you need for your function evaluation by addting Get\["../YourOwnPackage.m"] in the begining.
+
 
 
 
