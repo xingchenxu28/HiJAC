@@ -60,7 +60,7 @@ Sbatch file for resuming job arrays from breakpoints.
 We will assume everything is put in the directory /HiJAC 
 
 ### 3.1 Edit "/HiJAC/initial.m"
-11
+Put all your functions and constants in $/textbf{initial.m}$
 
 
 
