@@ -1,4 +1,4 @@
-# 1. HiJAC
+## 1. HiJAC
 HIgh performence computing Job Array Creator (HiJAC) is a Mathematica utility package for scanning a large parameter space on a high performence computing (HPC) cluster. HiJAC divides the original parameter space into smaller lists of parameters and run each of them simultaneously as slurm job arrays on the cluster. After all jobs are finished, HiJAC recombine all the results into a single matrix that has the same dimension as the original parameter space.
 
 ### What is it for:
@@ -23,7 +23,7 @@ There is a saying in Chinese: "工欲善其事，必先利其器", or "One must 
 
 The author hopes HiJAC can be helpful.
 
-# 2. Explaination of the files
+## 2. Explaination of the files
 
 ### HiJAC.m
 The main HiJAC package file. It contains the function $funSplitParameterSpace[k]$ that split the parameter space into $k$ one-dimensional lists and creat the job array for each small list. $k$ can be anything and does not have to be a factor of the total number of parameters $m_1 \times m_2 \times .. \times m_n$. You can put your function $f(p_1,p_2,..p_n)$ and all its dependent here.
@@ -56,7 +56,7 @@ Sbatch file for submitting new job arrays.
 Sbatch file for resuming job arrays from breakpoints.
 
 
-# 3. How to use HiJAC
+## 3. How to use HiJAC
 We will assume everything is put in the directory /HiJAC 
 
 ### 3.1 Edit "/HiJAC/HiJAC.m"
