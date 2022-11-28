@@ -72,9 +72,11 @@ Replace $funExample$ with the name of your own function to be evaluated. You can
 Specify your job name, time needed, cpu/memory needed and other HPC parameters here. These are for a single job in the job array. Load the appropriate Mathematica version for your HPC cluster by modifying "module load mathematica/12.1.1". I will assume it is 12.1.1 below.
 
 ### 3.5 Initialize the job array
-Run $\textbf{initial.m}$
+Load Mathematica and run $\textbf{initial.m}$:
 
 ```sh
-npm install remark-lint-code-block-style
+cd /HiJAC
+module load mathematica/12.1.1
+math <initial.m> initial.out&
 ```
 
