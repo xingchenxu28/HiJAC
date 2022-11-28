@@ -6,7 +6,7 @@ SetDirectory[NotebookDirectory[]];
 (*Import Functions*)
 Get["HiJAC.m"];
 
-(*enter your own ParameterMatrix here*)
+(*enter your own parameter matrix here*)
 parameters = Table[{i,j,k}, {i,1,30}, {j, 1, 30}, {k, 1, 30}];
 
 (*export parameter matrix*)
