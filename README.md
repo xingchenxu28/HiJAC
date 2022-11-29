@@ -1,3 +1,20 @@
+
+## HiJAC
+A Mathematica pacakge for running job arrays to scan a parameters space on a HPC cluster.
+
+
+## Contents
+
+*   [HiJAC](#HiJAC)
+*   [Explaination of the files](#explaination-of-the-files)
+*   [How to use HiJAC](#How-to-use-HiJAC)
+*   [Resume from breakpoints](#resume-from-breakpoints)
+*   [Hierarchical calculation](#hierarchical-calculation)
+*   [API](#api)
+    *   [`unified().use(remarkLintCodeBlockStyle[, config])`](#unifieduseremarklintcodeblockstyle-config)
+
+
+
 ## 1. HiJAC
 HIgh performence computing Job Array Creator (HiJAC) is a Mathematica utility package for scanning a large parameter space on a high performence computing (HPC) cluster. HiJAC divides the original parameter space into smaller lists of parameters and run each of them simultaneously as slurm job arrays on the cluster. After all jobs are finished, HiJAC recombine all the results into a single matrix that has the same dimension as the original parameter space.
 
@@ -25,34 +42,34 @@ The author hopes HiJAC can be helpful.
 
 ## 2. Explaination of the files
 
-### HiJAC.m
+##### `HiJAC.m`
 The main HiJAC package file. It contains the function $funSplitParameterSpace[k]$ that split the parameter space into $k$ one-dimensional lists and creat the job array for each small list. $k$ can be anything and does not have to be a factor of the total number of parameters $m_1 \times m_2 \times .. \times m_n$. You can put your function $f(p_1,p_2,..p_n)$ and all its dependent here.
 
-### initial.m 
+##### `initial.m`
 Initialize the job array. It creats "/HiJAC/parameters.mx" that contains the whole parameter space, and calls $funSplitParameterSpace[k]$ to creat the sub-directories /HiJAC/run1, /HiJAC/run2, .. /HiJAC/runk. Every /HiJAC/run* is a sub-job that calculate part of the parameter space. You need to define your parameter space $(p_1,p_2,..p_n)$ here. Every /HiJAC/run* includes three files: "parameters.mx" is the smaller parameter list for each sub-job, "run.m" and "rerun.m" are described below.
 
-### run.m
+##### `run.m`
 This will be copyied to each sub-directoriy /HiJAC/run*. It reads the parameters in "/HiJAC/run*/parameters.mx", calculate the results $f(p_1,p_2,..p_n)$, and export each result into a log file "/HiJAC/run*/output.dat" as seperate lines in real time. If all parameters have been covered, it export all results into "/HiJAC/run*/output.mx". You need to call your function $f(p_1,p_2,..p_n)$ here.
 
-### rerun.m
+##### `rerun.m`
 Resume from a breakpoint. This will be copyied to each sub-directoriy /HiJAC/run*. Similar to $\textbf{run.m}$. It is used to resume the job from from where it was left. It reads the unfinished "/HiJAC/run*/output.dat" and continue the calculation until all parameters have been covered, then export the results into "/HiJAC/run*/output.mx".
 
-### arraycheck.m
+##### `arraycheck.m`
 Resume from a breakpoint. This will check which /HiJAC/run* has not been finished and generate a bash file "/HiJAC/rerunarray.bash" which will submit jobs that excute $\textbf{rerun.m}$ for all unfinished /HiJAC/run*.
 
-### final.m
+##### `final.m`
 Finalize the task. When all jobs are completed, that is when there exists "/HiJAC/run*/output.mx" for each /HiJAC/run*, it will import all output and recombine them into a single matrix of dimension $m_1 \times m_2 \times .. \times m_n$ that has exactly the same structure as the parameter space defined in $\textbf{initial.m}$. The parameters $(p_1,p_2,..p_n)$ and the results $f(p_1,p_2,..p_n)$ are in one-to-one correspondence. Result will be export to "/HiJAC/result.mx"
 
-### nextlevel.m
+##### `nextlevel.m`
 Hierarchical calculation. This will check each /HiJAC/run* and summerize all unfinished parameters. Then it use the unfinished parameters to creat a second level job in directory /HiJACsub that is basically the same as /HiJAC except that "/HiJACsub/parameters.mx" only contains the unfinished parameters. /HiJACsub can now be treated as a new job just like /HiJAC but with a smallmer parameter space. The information of the parameter space structure is stored in "/HiJACsub/record.mx". This can be done iteratively, creating /HiJACsub, /HiJACsubsub, ... until the parameter space is small enough to be scaned all at once. 
 
-### previouslevel.m
+##### `previouslevel.m`
 Hierarchical calculation. This will summerize the finished results from a lower level e.g /HiJACsub and put them back into the corresponding log file "/HiJAC/run*/output.dat" of the upper level.
 
-### runarray.sbatch
+##### `runarray.sbatch`
 Sbatch file for submitting new job arrays.
 
-### rerunarray.sbatch
+##### `rerunarray.sbatch`
 Sbatch file for resuming job arrays from breakpoints.
 
 
@@ -117,7 +134,7 @@ If your jobs are terminated due to time limit and there are some parameters left
 
 ## 4. Resume from breakpoints
 
-Suppose you have split your parameter space into $k$ subspaces /run1, /run2 .. /runk, and $k$ = maximum allowed jobs in queue for your HPC cluster. If all your jobs are terminated and not all parameters are calculated according to the method in section 3.7, you have to finish the remaining parameter space. First check which subjob is incomplete:
+Suppose you have split your parameter space into $k$ subspaces /HiJAC/run1, /HiJAC/run2 .. /HiJAC/runk, and $k$ = maximum allowed jobs in queue for your HPC cluster. If all your jobs are terminated and not all parameters are calculated according to the method in section 3.7, you have to finish the remaining parameter space. First check which subjob is incomplete:
 
 ```sh
 math <arraycheck.m> arraycheck.out&
@@ -139,11 +156,108 @@ bash rerunarray.bash
 
 Now check for progress and wait for your jobs to finish. You may need resume multiple times if your estimation of the time is too short.
 
-### When to use "Resume from breakpoints"
+### When to use "resume from breakpoints"
+
+If by you "arraycheck" and find the total number of incomplete jobs are not much smaller than the total maximum job number $k$, then "resume from breakpoints" is a good way to move forward, since you cannot run more jobs at the same time anyway. However, if only 50% or less jobs are incomplete, you can only utilize less than half of allowed capabilities of your HPC cluster by resuming these jobs. In the extreme case, say $k=1000$ and only /run1 is incomplete due to some "stubborn" parameters, you can only scan the remaining parameters in /run1 in a one-by-one fashion. This is not optimal. A better way to maximize HPC cluster usage is the "Hierarchical calculation" described below in section 5.
 
 
+## 5. Hierarchical calculation
+
+Suppose you have split your parameter space into $k$ subspaces /HiJAC/run1,/HiJAC/run2 .. /HiJAC/runk, and $k$ = maximum allowed jobs in queue for your HPC cluster. If all your jobs are terminated and not all parameters are calculated according to the method in section 3.7, you have to finish the remaining parameter space. You checked which subjob is incomplete by
+
+```sh
+math <arraycheck.m> arraycheck.out&
+```
+
+and find that roughly less than half jobs are incomplete. Then you can use "Hierarchical calculation" to split the remaining parameters into $k$ subjobs again. Here is what to do
+
+### 5.1 Edit "/HiJAC/nextlevel.m" 
+
+Change the variable 
+
+```sh
+numruns = ;
+```
+
+to whatever number of subjobs you want for the "next level" jobs.
+
+### 5.2 Generate jobs in the next level 
+
+Generate the next level jobs by 
+
+```sh
+cd /HiJAC
+math <nextlevel.m> nextlevel.out&
+```
+
+This will take all remaining parameters in /HiJAC and put them into $k$ subjobs in a new directory /HiJACsub. 
+
+### 5.3 Run jobs in the next level 
+
+Now you can treat /HiJACsub as a stand alone parameter space and do your calculaton following section 3,4 and 5. This can be done multiple times and you end up with many levels /HiJACsub, /HiJACsubsub, /HiJACsubsubsub ... For illustration I will assume there are three levels /HiJAC, /HiJACsub, /HiJACsubsub.
 
 
+### 5.3 Finish jobs in the lowest level 
 
+Check if the lowest level jobs are finished by the "wd" command 
+
+```sh
+cd /HiJACsubsub
+wd -l run*/output.dat
+```
+
+and if finihsed, finalize it:
+
+```sh
+cd /HiJACsubsub
+math <final.m> final.out&
+```
+
+### 5.4 Optional but recommanded: Backup the higher level result
+
+Since we need to get feedback the result from a lower level, which will change "/run*/output.dat" in the higher level, it is a good practice to backup the results in case anything is wrong in this process. You can generate the backup as a tarball:
+
+```sh
+tar -cvf HiJAC_backup.tar /HiJACsub
+```
+
+### 5.5 Feedback the lower level results to the higher level
+
+```sh
+cd /HiJACsubsub
+math <previouslevel.m> previouslevel.out&
+```
+
+This will take the result from "/HiJACsubsub/results.mx" and feedback them into the higher level log file "HiJAC/run*/output.dat". It may take some time if the number of parameters are large. You can also monitor the prograss by the "wd" command
+
+```sh
+cd /HiJACsub
+wd -l run*/output.dat
+```
+
+If feedback process is finished, that is when the results from the "wd" command is the same as the total number of parameters in "/HiJACsub/parametes.mx", which can be get in Mathematica by
+
+```sh
+cd /HiJACsub
+math
+In[1]:= Import["parameters.mx"]//Dimensions
+```
+you can then finialize 
+
+```sh
+cd /HiJACsub
+math <final.m> final.out&
+```
+
+### 5.6 Continue feedback until the higher level /HiJAC
+
+Repeat the process from section 5.3-5.5 until you finalize the highest level /HiJAC
+
+```sh
+cd /HiJAC
+math <final.m> final.out&
+```
+
+Jobs done.
 
 
