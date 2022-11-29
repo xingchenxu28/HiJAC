@@ -5,7 +5,7 @@ A Mathematica pacakge for running job arrays to scan a parameters space on a HPC
 ## Contents
 
 *   [1. HiJAC](#HiJAC)
-*   [ 2. Explaination of the files](2.-#explaination-of-the-files)
+*   [ 2. Explaination of the files](#2.-explaination-of-the-files)
 *   [3. How to use HiJAC](#How-to-use-HiJAC)
 *   [4. Resume from breakpoints](#resume-from-breakpoints)
 *   [5. Hierarchical calculation](#hierarchical-calculation)
