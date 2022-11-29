@@ -10,6 +10,7 @@ A Mathematica pacakge for running job arrays to scan a parameters space on a HPC
 *   [How to use HiJAC](#How-to-use-HiJAC)
 *   [Resume from breakpoints](#resume-from-breakpoints)
 *   [Hierarchical calculation](#hierarchical-calculation)
+*   [Call python or other programs](#call-python-or-other-programs)
 
 ## 1. HiJAC
 HIgh performence computing Job Array Creator (HiJAC) is a Mathematica utility package for scanning a large parameter space on a high performence computing (HPC) cluster. HiJAC divides the original parameter space into smaller lists of parameters and run each of them simultaneously as slurm job arrays on the cluster. After all jobs are finished, HiJAC recombine all the results into a single matrix that has the same dimension as the original parameter space.
@@ -224,14 +225,14 @@ cd /HiJACsubsub
 math <previouslevel.m> previouslevel.out&
 ```
 
-This will take the result from "/HiJACsubsub/results.mx" and feedback them into the higher level log file "HiJAC/run*/output.dat". It may take some time if the number of parameters are large. You can also monitor the prograss by the "wd" command
+This will take the result from `/HiJACsubsub/results.mx` and feedback them into the higher level log file "HiJAC/run*/output.dat". It may take some time if the number of parameters are large. You can also monitor the prograss by the `wd` command
 
 ```sh
 cd /HiJACsub
 wd -l run*/output.dat
 ```
 
-If feedback process is finished, that is when the results from the "wd" command is the same as the total number of parameters in "/HiJACsub/parametes.mx", which can be get in Mathematica by
+If feedback process is finished, that is when the results from the `wd` command is the same as the total number of parameters in `/HiJACsub/parametes.mx`, which can be get in Mathematica by
 
 ```sh
 cd /HiJACsub
@@ -247,7 +248,7 @@ math <final.m> final.out&
 
 ### 5.6 Continue feedback up to the highest level /HiJAC
 
-Repeat the process from section 5.3-5.5 until you finalize the highest level /HiJAC
+Repeat the process from section 5.3-5.5 until you finalize the highest level `/HiJAC`
 
 ```sh
 cd /HiJAC
@@ -255,5 +256,9 @@ math <final.m> final.out&
 ```
 
 Jobs done.
+
+## 6. Call python or other programs
+
+Sometimes your functions are written in python or other programing langauges rather than Mathematica. As long as they can be called within Mathematica, you can still use HiJAC. The directory `/HiJAC/HiJAC_python` contains the files `run.m` `rerun.m` `runarray.sbatch` `rerunarray.sbatch` for running a python script with HiJAC. Simply replace the coresponding files in `/HiJAC`, and change the python module path in the `.sbatch` files. Extension to other programs should be straightforward.
 
 
