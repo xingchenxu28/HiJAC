@@ -237,8 +237,11 @@ to whatever number of subjobs you want for the `next level` jobs.
    ```sh
    cd /HiJACsub
    math
-   In[1]:= Import[`parameters.mx`]//Dimensions
    ```
+   ```Mathematica
+   Import["parameters.mx"]//Dimensions
+   ```
+   
    you can then finialize 
 
    ```sh
