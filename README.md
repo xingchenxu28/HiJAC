@@ -109,11 +109,11 @@ math <final.m> final.out&
 
 This will creat the final result file `/HiJAC/result.mx`, which should has the same dimension as the original parameter space `/HiJAC/parameters.mx`. The results and the parameters are in one-to-one correspondence in these two files.
 
-If your jobs are terminated due to time limit and there are some parameters left, you can chooese between the following two methods: (1) Resume from breakpoints or (2) Hierarchical calculation. Which one is better depends on how many parameters are left, as described in section 4 and 5
+If your jobs are terminated due to time limit and there are some parameters left, you can chooese between the following two methods: [Resume from breakpoints](#resume-from-breakpoints) or [Hierarchical calculation](#hierarchical-calculation). Which one is better depends on how many parameters are left, as described below
 
 ## Resume from breakpoints
 
-Suppose you have split your parameter space into $k$ subspaces `/HiJAC/run1`, `/HiJAC/run2` .. `/HiJAC/runk`, and $k$ = maximum allowed jobs in queue for your HPC cluster. If all your jobs are terminated and not all parameters are calculated according to the method in section 3.7, you have to finish the remaining parameter space. First check which subjob is incomplete:
+Suppose you have split your parameter space into $k$ subspaces `/HiJAC/run1`, `/HiJAC/run2` .. `/HiJAC/runk`, and $k$ = `maximum allowed jobs in queue for your HPC cluster`. If all your jobs are terminated and not all parameters are calculated according to the method in section 3.7, you have to finish the remaining parameter space. First check which subjob is incomplete:
 
 ```sh
 math <arraycheck.m> arraycheck.out&
