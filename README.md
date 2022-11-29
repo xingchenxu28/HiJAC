@@ -119,7 +119,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
 
 8. Recombine all results
 
-   If all job arrays are finished and you checked by the `wd` command described in section 3.7, you can run `final.m` to recombine all the results:
+   If all job arrays are finished and you checked by the `wd` command, you can run `final.m` to recombine all the results:
 
    ```sh
    math <final.m> final.out&
@@ -160,13 +160,13 @@ If by you `arraycheck` and find the total number of incomplete jobs are not much
 
 ## Hierarchical calculation
 
-Suppose you have split your parameter space into $k$ subspaces `/HiJAC/run1`,`/HiJAC/run2` .. `/HiJAC/runk`, and $k$ = maximum allowed jobs in queue for your HPC cluster. If all your jobs are terminated and not all parameters are calculated according to the method in section 3.7, you have to finish the remaining parameter space. You checked which subjob is incomplete by
+Suppose you have split your parameter space into $k$ subspaces `/HiJAC/run1`,`/HiJAC/run2` .. `/HiJAC/runk`, and $k$ = maximum allowed jobs in queue for your HPC cluster. If all your jobs are terminated but not all parameters are calculated, you have to finish the remaining parameter space. If you check which subjob is incomplete by
 
 ```sh
 math <arraycheck.m> arraycheck.out&
 ```
 
-and find that roughly less than half jobs are incomplete. Then you can use `Hierarchical calculation` to split the remaining parameters into $k$ subjobs again. Here is what to do
+and find that roughly less than half jobs are incomplete. Then you can use `Hierarchical calculation` to split the remaining parameters into $k$ subjobs again. Here is how to do it
 
 1. Edit `/HiJAC/nextlevel.m` 
 
