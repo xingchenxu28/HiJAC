@@ -249,7 +249,7 @@ cd /HiJACsub
 math <final.m> final.out&
 ```
 
-### 5.6 Continue feedback until the higher level /HiJAC
+### 5.6 Continue feedback up to the highest level /HiJAC
 
 Repeat the process from section 5.3-5.5 until you finalize the highest level /HiJAC
 
