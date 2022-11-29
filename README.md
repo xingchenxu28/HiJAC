@@ -117,7 +117,7 @@ If your jobs are terminated due to time limit and there are some parameters left
 
 ## 4. Resume from breakpoints
 
-
+Suppose you have split your parameter space into $k$ sub space /run1, run/2 .. /runk, and $k$ = maximum allowed jobs in queue for your HPC cluster.
 
 
 
