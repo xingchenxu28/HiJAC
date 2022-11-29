@@ -68,9 +68,11 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
    Replace $funExample$ with the name of your own function to be evaluated. You can import whatever package you need for your function evaluation by addting `Get\["../YourOwnPackage.m"]` in the begining.
 
 4. Edit `/HiJAC/runarray.sbatch` and `/HiJAC/rerunarray.sbatch`
+
    Specify your job name, time needed, cpu/memory needed and other HPC parameters here. These are for a single job in the job array. Load the appropriate Mathematica version for your HPC cluster by modifying `module load mathematica/12.1.1`. I will assume it is 12.1.1 below.
 
 5. Initialize the job array
+   
    Load Mathematica and run `initial.m`:
 
    ```sh
@@ -82,6 +84,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
    This may take some time if your parameter space is very large. `initial.m` will creat `/HiJAC/parameters.mx` as the overall parameter space, and creat directories /HiJAC/run1 through /HiJAC/runk with $\textbf{run.m}$, `rerun.m`, `parameters.mx` in each of them. The `/HiJAC/run*/parameters.mx` only contains parameters for that subspace. 
 
 6. Submit the job array
+   
    Submit the job array by
 
    ```sh
@@ -89,30 +92,32 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
    ```
 
 7. Monitor the progress
+   
    As the jobs are running, results will be exported to `HiJAC/run*/output.dat` as seperate lines. Check how many parameters has been calculated by counting the lines in all these .dat files:
 
    ```sh
    wd -l run*/output.dat
    ```
 
-When the total number of lines you get from the above command equals to the total number of parameters, your jobs are finished and it's time to run $\textbf{final.m}$.
+   When the total number of lines you get from the above command equals to the total number of parameters, your jobs are finished and it is time to run $\textbf{final.m}$.
 
-Also you can check if your program is running properly by looking at these .dat files, e.g.
+   Also you can check if your program is running properly by looking at these `.dat` files, e.g.
 
-```sh
-cat run1/output.dat
-```
+   ```sh
+   cat run1/output.dat
+   ```
 
-### 3.8 Recombine all results
-If all job arrays are finished and you checked by the `wd` command described in section 3.7, you can run `final.m` to recombine all the results:
+8. Recombine all results
 
-```sh
-math <final.m> final.out&
-```
+   If all job arrays are finished and you checked by the `wd` command described in section 3.7, you can run `final.m` to recombine all the results:
 
-This will creat the final result file `/HiJAC/result.mx`, which should has the same dimension as the original parameter space `/HiJAC/parameters.mx`. The results and the parameters are in one-to-one correspondence in these two files.
+   ```sh
+   math <final.m> final.out&
+   ```
 
-If your jobs are terminated due to time limit and there are some parameters left, you can chooese between the following two methods: [Resume from breakpoints](#resume-from-breakpoints) or [Hierarchical calculation](#hierarchical-calculation). Which one is better depends on how many parameters are left, as described below
+   This will creat the final result file `/HiJAC/result.mx`, which should has the same dimension as the original parameter space `/HiJAC/parameters.mx`. The results and the parameters are in one-to-one correspondence in these two files.
+
+   If your jobs are terminated due to time limit and there are some parameters left, you can chooese between the following two methods: [Resume from breakpoints](#resume-from-breakpoints) or [Hierarchical calculation](#hierarchical-calculation). Which one is better depends on how many parameters are left, as described below.
 
 ## Resume from breakpoints
 
