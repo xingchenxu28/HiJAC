@@ -176,7 +176,7 @@ and find that roughly less than half jobs are incomplete. Then you can use `Hier
    numruns = 100;
    ```
 
-to whatever number of subjobs you want for the `next level` jobs.
+   to whatever number of subjobs you want for the `next level` jobs.
 
 2. Generate jobs in the next level 
 
@@ -205,10 +205,10 @@ to whatever number of subjobs you want for the `next level` jobs.
 
    and if finihsed, finalize it:
 
-  ```sh
-  cd /HiJACsubsub
-  math <final.m> final.out&
-  ```
+   ```sh
+   cd /HiJACsubsub
+   math <final.m> final.out&
+   ```
 
 5. Optional but recommanded: Backup the higher level result
 
@@ -232,7 +232,7 @@ to whatever number of subjobs you want for the `next level` jobs.
    wd -l run*/output.dat
    ```
 
-  If feedback process is finished, that is when the results from the `wd` command is the same as the total number of parameters in `/HiJACsub/parametes.mx`, which can be get in Mathematica by
+   If feedback process is finished, that is when the results from the `wd` command is the same as the total number of parameters in `/HiJACsub/parametes.mx`, which can be get in Mathematica by
 
    ```sh
    cd /HiJACsub
