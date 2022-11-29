@@ -32,7 +32,7 @@ Notice: The function $f()$ and its dependent can be written in Mathematica or py
 ### Words from the author
 Mathematica has been widely used in the high energy physics community (especially for phenomenology) because of its strong symbolic calculation power. As theorestis or phenomenologists we often need to solve differential equations or evaluate numerical intergrations for a large parameter space. For example, predicting the number of events in a dark matter (DM) direct detection experiment based on some specific dark matter model with DM mass $m_\chi$ and effective coupling $\alpha$ usually requires a full scan of the 2-D $(m_\chi,\alpha)$ plane. The natural way to accelerate this process is to put the calculation in a HPC cluster and divide your parameter space into job arrays. This is highly non-trivial in Mathematica (maybe easier in python). HiJAC is born to solve this problem.
 
-There is a saying in Chinese: **`工欲善其事，必先利其器`**, or `One must have good tools in order to do a good job`. Learning to use HiJAC may take some time (mostly about one hour). However, once you mastered it, it will save you a lot of time especially when your parameter space is large. Of course, the user must have some knowledge of how to use HPC clusters and submit job arrays in slurm. 
+There is a saying in Chinese: **`工欲善其事，必先利其器`** (*The Analects of Confucius: Duke Ling of Wey*, 500 BC), or `One must have good tools in order to do a good job`. Learning to use HiJAC may take some time (mostly about one hour). However, once you mastered it, it will save you a lot of time especially when your parameter space is large. Of course, the user must have some knowledge of how to use HPC clusters and submit job arrays in slurm. 
 
 The author hopes HiJAC can be helpful.
 
@@ -43,7 +43,7 @@ The author hopes HiJAC can be helpful.
 | **HiJAC.m**             | The main HiJAC package file. It contains the function $funSplitParameterSpace[k]$ that split the parameter space into $k$ one-dimensional lists and creat the job array for each small list. $k$ can be anything and does not have to be a factor of the total number of parameters $m_1 \times m_2 \times .. \times m_n$. You can put your function $f(p_1,p_2,..p_n)$ and all its dependent here. |
 | **initial.m**            | Initialize the job array. It creats `/HiJAC/parameters.mx` that contains the whole parameter space, and calls $funSplitParameterSpace[k]$ to creat the sub-directories `/HiJAC/run1`, `/HiJAC/run2`, .. `/HiJAC/runk`. Every `/HiJAC/run*` is a sub-job that calculate part of the parameter space. You need to define your parameter space $(p_1,p_2,..p_n)$ here. Every `/HiJAC/run*` includes three files: `parameters.mx` is the smaller parameter list for each sub-job, `run.m` and `rerun.m` are described below.|
 | **run.m**                | This will be copyied to each sub-directoriy `/HiJAC/run*`. It reads the parameters in `/HiJAC/run*/parameters.mx`, calculate the results $f(p_1,p_2,..p_n)$, and export each result into a log file `/HiJAC/run*/output.dat` as seperate lines in real time. If all parameters have been covered, it export all results into `/HiJAC/run*/output.mx`. You need to call your function $f(p_1,p_2,..p_n)$ here.|
-| **rerun.m**              | Resume from a breakpoint. This will be copyied to each sub-directoriy `/HiJAC/run*`. Similar to $\textbf{run.m}$. It is used to resume the job from from where it was left. It reads the unfinished `/HiJAC/run*/output.dat` and continue the calculation until all parameters have been covered, then export the results into `/HiJAC/run*/output.mx`.|
+| **rerun.m**              | Resume from a breakpoint. This will be copyied to each sub-directoriy `/HiJAC/run*`. Similar to `run.m`. It is used to resume the job from from where it was left. It reads the unfinished `/HiJAC/run*/output.dat` and continue the calculation until all parameters have been covered, then export the results into `/HiJAC/run*/output.mx`.|
 | **arraycheck.m**         | Resume from a breakpoint. This will check which `/HiJAC/run*` has not been finished and generate a bash file `/HiJAC/rerunarray.bash` which will submit jobs that excute `rerun.m` for all unfinished `/HiJAC/run*`.|
 | **final.m**             | Finalize the task. When all jobs are completed, that is when there exists `/HiJAC/run*/output.mx` for each `/HiJAC/run*`, it will import all output and recombine them into a single matrix of dimension $m_1 \times m_2 \times .. \times m_n$ that has exactly the same structure as the parameter space defined in `initial.m`. The parameters $(p_1,p_2,..p_n)$ and the results $f(p_1,p_2,..p_n)$ are in one-to-one correspondence. Result will be export to `/HiJAC/result.mx`.|
 | **nextlevel.m**        | Hierarchical calculation. This will check each `/HiJAC/run*` and summerize all unfinished parameters. Then it use the unfinished parameters to creat a second level job in directory /HiJACsub that is basically the same as `/HiJAC` except that `/HiJACsub/parameters.mx` only contains the unfinished parameters. `/HiJACsub` can now be treated as a new job just like /HiJAC but with a smallmer parameter space. The information of the parameter space structure is stored in `/HiJACsub/record.mx`. This can be done iteratively, creating `/HiJACsub`, `/HiJACsubsub`, ... until the parameter space is small enough to be scaned all at once. |
@@ -57,7 +57,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
 
 1. Edit `/HiJAC/HiJAC.m`
 
-   Put all your functions and constants in `HiJAC.m` (remember to declear them properly in the begining `Preamble`) so that they can be used by $\textbf{run.m}$ and $\textbf{rerun.m}$. Replace the example function $funExample(p1,p2,p3)$ with the function you want to evaluate. Alternatively, if a seperate package `/HiJAC/YourOwnPackage.m` has all your stuffs, you can choose to import it in `run.m` and `rerun.m` by adding the line `Get["../YourOwnPackage.m"]` in both of them.
+   Put all your functions and constants in `HiJAC.m` (remember to declear them properly in the begining `Preamble`) so that they can be used by `run.m` and `rerun.m`. Replace the example function $funExample(p1,p2,p3)$ with the function you want to evaluate. Alternatively, if a seperate package `/HiJAC/YourOwnPackage.m` has all your stuffs, you can choose to import it in `run.m` and `rerun.m` by adding the line `Get["../YourOwnPackage.m"]` in both of them.
 
 2. Edit `/HiJAC/initial.m`
    
@@ -81,7 +81,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
    math <initial.m> initial.out&
    ```
 
-   This may take some time if your parameter space is very large. `initial.m` will creat `/HiJAC/parameters.mx` as the overall parameter space, and creat directories /HiJAC/run1 through /HiJAC/runk with $\textbf{run.m}$, `rerun.m`, `parameters.mx` in each of them. The `/HiJAC/run*/parameters.mx` only contains parameters for that subspace. 
+   This may take some time if your parameter space is very large. `initial.m` will creat `/HiJAC/parameters.mx` as the overall parameter space, and creat directories /HiJAC/run1 through /HiJAC/runk with `run.m`, `rerun.m`, `parameters.mx` in each of them. The `/HiJAC/run*/parameters.mx` only contains parameters for that subspace. 
 
 6. Submit the job array
    
@@ -99,7 +99,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
    wd -l run*/output.dat
    ```
 
-   When the total number of lines you get from the above command equals to the total number of parameters, your jobs are finished and it is time to run $\textbf{final.m}$.
+   When the total number of lines you get from the above command equals to the total number of parameters, your jobs are finished and it is time to run `final.m`.
 
    Also you can check if your program is running properly by looking at these `.dat` files, e.g.
 
