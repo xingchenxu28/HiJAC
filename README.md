@@ -55,42 +55,45 @@ The author hopes HiJAC can be helpful.
 ## How to use HiJAC
 Here is a step-by-step guide on how to use HiJAC. We will assume everything is put in the directory `/HiJAC`
 
-### 3.1 Edit `/HiJAC/HiJAC.m`
-Put all your functions and constants in `HiJAC.m` (remember to declear them properly in the begining `Preamble`) so that they can be used by $\textbf{run.m}$ and $\textbf{rerun.m}$. Replace the example function $funExample(p1,p2,p3)$ with the function you want to evaluate. Alternatively, if a seperate package `/HiJAC/YourOwnPackage.m` has all your stuffs, you can choose to import it in `run.m` and `rerun.m` by adding the line `Get["../YourOwnPackage.m"]` in both of them.
+1. Edit `/HiJAC/HiJAC.m`
 
-### 3.2 Edit `/HiJAC/initial.m`
-Define your parameter space in `HiJAC.m`. It can be any dimension but must be regular. Irregular matrix needs be converted to a $1\times N$ matrix first. Specify how many subspaces you want to split your parameter space into by changing the variable of $funSplitParameterSpace(k)$. The default is $k=100$. And theoretically $1\leq k \leq$ total number of parameters. However, the maximum of $k$ usually depends on how many job arrays you are allowed to queue in the HPC cluster you are using.
+   Put all your functions and constants in `HiJAC.m` (remember to declear them properly in the begining `Preamble`) so that they can be used by $\textbf{run.m}$ and $\textbf{rerun.m}$. Replace the example function $funExample(p1,p2,p3)$ with the function you want to evaluate. Alternatively, if a seperate package `/HiJAC/YourOwnPackage.m` has all your stuffs, you can choose to import it in `run.m` and `rerun.m` by adding the line `Get["../YourOwnPackage.m"]` in both of them.
 
-### 3.3 Edit `/HiJAC/run.m` and `/HiJAC/rerun.m`
-Replace $funExample$ with the name of your own function to be evaluated. You can import whatever package you need for your function evaluation by addting `Get\["../YourOwnPackage.m"]` in the begining.
+2. Edit `/HiJAC/initial.m`
+   
+   Define your parameter space in `HiJAC.m`. It can be any dimension but must be regular. Irregular matrix needs be converted to a $1\times N$ matrix first. Specify how many subspaces you want to split your parameter space into by changing the variable of $funSplitParameterSpace(k)$. The default is $k=100$. And theoretically $1\leq k \leq$ total number of parameters. However, the maximum of $k$ usually depends on how many job arrays you are allowed to queue in the HPC cluster you are using.
 
-### 3.4 Edit `/HiJAC/runarray.sbatch` and `/HiJAC/rerunarray.sbatch`
-Specify your job name, time needed, cpu/memory needed and other HPC parameters here. These are for a single job in the job array. Load the appropriate Mathematica version for your HPC cluster by modifying `module load mathematica/12.1.1`. I will assume it is 12.1.1 below.
+3. Edit `/HiJAC/run.m` and `/HiJAC/rerun.m`
+   
+   Replace $funExample$ with the name of your own function to be evaluated. You can import whatever package you need for your function evaluation by addting `Get\["../YourOwnPackage.m"]` in the begining.
 
-### 3.5 Initialize the job array
-Load Mathematica and run `initial.m`:
+4. Edit `/HiJAC/runarray.sbatch` and `/HiJAC/rerunarray.sbatch`
+   Specify your job name, time needed, cpu/memory needed and other HPC parameters here. These are for a single job in the job array. Load the appropriate Mathematica version for your HPC cluster by modifying `module load mathematica/12.1.1`. I will assume it is 12.1.1 below.
 
-```sh
-cd /HiJAC
-module load mathematica/12.1.1
-math <initial.m> initial.out&
-```
+5. Initialize the job array
+   Load Mathematica and run `initial.m`:
 
-This may take some time if your parameter space is very large. `initial.m` will creat `/HiJAC/parameters.mx` as the overall parameter space, and creat directories /HiJAC/run1 through /HiJAC/runk with $\textbf{run.m}$, `rerun.m`, `parameters.mx` in each of them. The `/HiJAC/run*/parameters.mx` only contains parameters for that subspace. 
+   ```sh
+   cd /HiJAC
+   module load mathematica/12.1.1
+   math <initial.m> initial.out&
+   ```
 
-### 3.6 Submit the job array
-Submit the job array by
+   This may take some time if your parameter space is very large. `initial.m` will creat `/HiJAC/parameters.mx` as the overall parameter space, and creat directories /HiJAC/run1 through /HiJAC/runk with $\textbf{run.m}$, `rerun.m`, `parameters.mx` in each of them. The `/HiJAC/run*/parameters.mx` only contains parameters for that subspace. 
 
-```sh
-sbatch --array=1-k runarray.sbatch
-```
+6. Submit the job array
+   Submit the job array by
 
-### 3.7 Monitor the progress
-As the jobs are running, results will be exported to `HiJAC/run*/output.dat` as seperate lines. Check how many parameters has been calculated by counting the lines in all these .dat files:
+   ```sh
+   sbatch --array=1-k runarray.sbatch
+   ```
 
-```sh
-wd -l run*/output.dat
-```
+7. Monitor the progress
+   As the jobs are running, results will be exported to `HiJAC/run*/output.dat` as seperate lines. Check how many parameters has been calculated by counting the lines in all these .dat files:
+
+   ```sh
+   wd -l run*/output.dat
+   ```
 
 When the total number of lines you get from the above command equals to the total number of parameters, your jobs are finished and it's time to run $\textbf{final.m}$.
 
