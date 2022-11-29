@@ -5,7 +5,7 @@ A Mathematica pacakge for running job arrays to scan a parameters space on a HPC
 ## Contents
 
 *   [1. HiJAC](#HiJAC)
-*   [ 2. Explaination of the files](#2.-explaination-of-the-files)
+*   [Explaination of the files](#explaination-of-the-files)
 *   [3. How to use HiJAC](#How-to-use-HiJAC)
 *   [4. Resume from breakpoints](#resume-from-breakpoints)
 *   [5. Hierarchical calculation](#hierarchical-calculation)
@@ -36,7 +36,7 @@ There is a saying in Chinese: `工欲善其事，必先利其器`, or `One must 
 
 The author hopes HiJAC can be helpful.
 
-## 2. Explaination of the files
+## Explaination of the files
 
 | File Names             | Description |
 | ---------------------- | ------------|
