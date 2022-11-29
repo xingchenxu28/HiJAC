@@ -117,7 +117,29 @@ If your jobs are terminated due to time limit and there are some parameters left
 
 ## 4. Resume from breakpoints
 
-Suppose you have split your parameter space into $k$ sub space /run1, run/2 .. /runk, and $k$ = maximum allowed jobs in queue for your HPC cluster.
+Suppose you have split your parameter space into $k$ subspaces /run1, /run2 .. /runk, and $k$ = maximum allowed jobs in queue for your HPC cluster. If all your jobs are terminated and not all parameters are calculated according to the method in section 3.7, you have to finish the remaining parameter space. First check which subjob is incomplete:
+
+```sh
+math <arraycheck.m> arraycheck.out&
+```
+
+This will generate a file "rerunarray.bash" ending with a command 
+
+```sh
+sbatch --array=a1,a2,... rerunarray.sbatch&
+```
+
+where "a1,a2,..." are all the incomplete jobs.
+
+Then edit the running time in "/HiJAC/rerunarray.sbatch" for these jobs. Based on the portion of completed parameters for each job, you should have a good estimate of the time remaining for incomplete jobs. Then you can submit the job array for the incomplete jobs:
+
+```sh
+bash rerunarray.bash
+```
+
+Now check for progress and wait for your jobs to finish. You may need resume multiple times if your estimation of the time is too short.
+
+### When to use "Resume from breakpoints"
 
 
 
