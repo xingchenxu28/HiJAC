@@ -1,4 +1,4 @@
-## HiJAC
+# HiJAC
 A Mathematica pacakge for running job arrays to scan a parameters space on a HPC cluster.
 
 
