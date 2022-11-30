@@ -155,7 +155,7 @@ Now check for progress and wait for your jobs to finish. You may need resume mul
 
 ### When to use [`resume from breakpoints`](#resume-from-breakpoints)
 
-If by you `arraycheck` and find the total number of incomplete jobs are not much smaller than the total maximum job number $k$, then `resume from breakpoints` is a good way to move forward, since you cannot run more jobs at the same time anyway. However, if only 50% or less jobs are incomplete, you can only utilize less than half of allowed capabilities of your HPC cluster by resuming these jobs. In the extreme case, say $k=1000$ and only /run1 is incomplete due to some "stubborn" parameters, you can only scan the remaining parameters in /run1 in a one-by-one fashion. This is not optimal. A better way to maximize HPC cluster usage is the [hierarchical calculation](#hierarchical-calculation) described below.
+If you `arraycheck` and find the total number of incomplete jobs are not much smaller than the total maximum job number $k$, then `resume from breakpoints` is a good way to move forward, since you cannot run more jobs at the same time anyway. However, if only 50% or less jobs are incomplete, you can only utilize less than half of allowed capabilities of your HPC cluster by resuming these jobs. In the extreme case, say $k=1000$ and only /run1 is incomplete due to some "stubborn" parameters, you can only scan the remaining parameters in /run1 in a one-by-one fashion. This is not optimal. A better way to maximize HPC cluster usage is the [hierarchical calculation](#hierarchical-calculation) described below.
 
 
 ## Hierarchical calculation
