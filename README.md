@@ -262,4 +262,4 @@ and find that roughly less than half jobs are incomplete. Then you can use `Hier
 
 ## Call python or other programs
 
-Sometimes your functions are written in python or other programing langauges rather than Mathematica. As long as they can be called within Mathematica, you can still use HiJAC. The directory `/HiJAC/HiJAC_python` contains the files `run.m` `rerun.m` `runarray.sbatch` `rerunarray.sbatch` for running a python script with HiJAC. Simply replace the coresponding files in `/HiJAC`, and change the python module path in the `.sbatch` files. Extension to other programs should be straightforward.
+Sometimes your functions are written in python or other programing langauges rather than Mathematica. As long as they can be called within Mathematica, you can still use HiJAC. The directory `/HiJAC/HiJAC_python` contains the files `run.m` `rerun.m` `runarray.sbatch` `rerunarray.sbatch` for running a python script with HiJAC. Simply replace the coresponding files in `/HiJAC`, put your python script under `/HiJAC` and change the python module path in the `.sbatch` files. Extension to other programs should be straightforward.
