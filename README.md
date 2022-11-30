@@ -29,7 +29,7 @@ Notice: The function $f()$ and its dependent can be written in Mathematica or py
 
 1. **Monitor the progress in real time**
 
-   HiJAC allows you to see how many parameters that has been completed.
+   HiJAC allows you to see how many parameters that have been completed.
    
 2. **Resume from a breakpoint**
    
