@@ -125,7 +125,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
    math <final.m> final.out&
    ```
 
-   This will creat the final result file `/HiJAC/result.mx`, which should has the same dimension as the original parameter space `/HiJAC/parameters.mx`. The results and the parameters are in one-to-one correspondence in these two files.
+   This will creat the final result file `/HiJAC/result.mx`, which should have the same dimension as the original parameter space `/HiJAC/parameters.mx`. The results and the parameters are in one-to-one correspondence in these two files.
 
    If your jobs are terminated due to time limit and there are some parameters left, you can chooese between the following two methods: [Resume from breakpoints](#resume-from-breakpoints) or [Hierarchical calculation](#hierarchical-calculation). Which one is better depends on how many parameters are left, as described below.
 
