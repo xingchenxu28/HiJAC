@@ -200,7 +200,7 @@ and find that roughly less than half jobs are incomplete. Then you can use `Hier
 
    ```sh
    cd /HiJACsubsub
-   wd -l run*/output.dat
+   wc -l run*/output.dat
    ```
 
    and if finihsed, finalize it:
