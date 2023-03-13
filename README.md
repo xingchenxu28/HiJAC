@@ -225,14 +225,14 @@ and find that roughly less than half jobs are incomplete. Then you can use `Hier
    math <previouslevel.m> previouslevel.out&
    ```
 
-   This will take the result from `/HiJACsubsub/results.mx` and feedback them into the higher level log file `HiJAC/run*/output.dat`. It may take some time if the number of parameters are large. You can also monitor the prograss by the `wd` command
+   This will take the result from `/HiJACsubsub/results.mx` and feedback them into the higher level log file `HiJAC/run*/output.dat`. It may take some time if the number of parameters are large. You can also monitor the prograss by the `wc` command
 
    ```sh
    cd /HiJACsub
-   wd -l run*/output.dat
+   wc -l run*/output.dat
    ```
 
-   If feedback process is finished, that is when the results from the `wd` command is the same as the total number of parameters in `/HiJACsub/parametes.mx`, which can be get in Mathematica by
+   If feedback process is finished, that is when the results from the `wc` command is the same as the total number of parameters in `/HiJACsub/parametes.mx`, which can be get in Mathematica by
 
    ```sh
    cd /HiJACsub
