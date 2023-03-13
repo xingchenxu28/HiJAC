@@ -106,7 +106,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
    As the jobs are running, results will be exported to `HiJAC/run*/output.dat` as seperate lines. Check how many parameters has been calculated by counting the lines in all these .dat files:
 
    ```sh
-   wd -l run*/output.dat
+   wc -l run*/output.dat
    ```
 
    When the total number of lines you get from the above command equals to the total number of parameters, your jobs are finished and it is time to run `final.m`.
@@ -119,7 +119,7 @@ Here is a step-by-step guide on how to use HiJAC. We will assume everything is p
 
 8. Recombine all results
 
-   If all job arrays are finished and you checked by the `wd` command, you can run `final.m` to recombine all the results:
+   If all job arrays are finished and you checked by the `wc` command, you can run `final.m` to recombine all the results:
 
    ```sh
    math <final.m> final.out&
@@ -196,7 +196,7 @@ and find that roughly less than half jobs are incomplete. Then you can use `Hier
 
 4. Finish jobs in the lowest level 
 
-   Check if the lowest level jobs are finished by the `wd` command 
+   Check if the lowest level jobs are finished by the `wc` command 
 
    ```sh
    cd /HiJACsubsub
